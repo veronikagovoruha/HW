@@ -8,6 +8,12 @@
       <button class="search_btn">
         <i class="material-icons" @click="search(searchValue)">search</i>
       </button>
+
+      <router-link :to="{name: 'cart', params: {cart_data: CART}}">
+        <div class="header__link_to_cart">
+          <img class="header__link_to_cart-image" :src="require('../../assets/images/shopping-cart.svg')" alt="">{{CART.length}}
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -25,13 +31,15 @@
     },
     computed: {
       ...mapGetters([
-        'SEARCH_VALUE'
+        'CART',
+        'SEARCH_VALUE',
       ])
     },
     methods: {
       ...mapActions([
         'GET_SEARCH_VALUE_TO_VUEX',
         'GET_BOOKS_FROM_API',
+        'ADD_TO_CART'
       ]),
       search(searchValue) {
         this.GET_BOOKS_FROM_API(searchValue);
@@ -57,6 +65,16 @@
 
     img {
       width: 50px;
+    }
+
+    .header__link_to_cart{
+      padding-left: 40px;
+    }
+
+    .header__link_to_cart-image{
+      height: 30px;
+      width: 30px;
+      padding-right: 5px;
     }
 
     .search-field {

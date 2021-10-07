@@ -1,17 +1,29 @@
 <template>
   <div id="app">
-    <vMainWrapper />
+    <Header />
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
-  import vMainWrapper from './components/MainWrapper'
+  import Header from './components/layouts/Header'
 
 export default {
   name: 'app',
   components: {
-    vMainWrapper
+    Header
   },
+  props: {},
+  data() {
+    return {
+      title: 'App'
+    }
+  },
+  computed: {},
+  methods: {},
+  watch: {}
 }
 </script>
 

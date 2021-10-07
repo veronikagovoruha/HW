@@ -5,12 +5,6 @@
         :messages="messages"
     />
 
-
-    <router-link :to="{name: 'cart', params: {cart_data: CART}}">
-      <div class="catalog__link_to_cart">
-        <img class="catalog__link_to_cart-image" :src="require('../../assets/images/shopping-cart.svg')" alt="">{{CART.length}}
-      </div>
-    </router-link>
     <h1>Каталог</h1>
     <div class="catalog__list">
       <BookItem
@@ -49,8 +43,6 @@
     computed: {
       ...mapGetters([
         'BOOKS',
-        'CART',
-        'SEARCH_VALUE',
         'FORM',
       ]),
       booksList() {
@@ -144,8 +136,5 @@
     margin-top: -7px;
   }
 
-  .catalog__link_to_cart-image{
-    width: 35px;
-    height: 35px;
-  }
+
 </style>
