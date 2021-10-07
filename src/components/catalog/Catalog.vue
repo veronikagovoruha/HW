@@ -1,7 +1,7 @@
 <template>
   <div class='catalog'>
 
-    <vNotification
+    <Notification
         :messages="messages"
     />
 
@@ -13,7 +13,7 @@
     </router-link>
     <h1>Каталог</h1>
     <div class="catalog__list">
-      <vBookItem
+      <BookItem
           v-for="book in booksList"
           :key="book.title"
           :bookData="book"
@@ -25,15 +25,15 @@
 </template>
 
 <script>
-  import vBookItem from './BookItem'
+  import BookItem from './BookItem'
   import {mapActions, mapGetters} from 'vuex'
-  import vNotification from '../notifications/Notification'
+  import Notification from '../notifications/Notification'
 
   export default {
     name: "Catalog",
     components: {
-      vBookItem,
-      vNotification
+      BookItem,
+      Notification
     },
     props: {},
     data() {

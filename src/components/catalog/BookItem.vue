@@ -1,5 +1,5 @@
 <template >
-  <div class='catalog-item'>
+  <div class='book-item'>
 
     <v-popup
         v-if="isInfoPopupVisible"
@@ -11,25 +11,25 @@
         :phoneValue="phoneValue"
         :emailValue="emailValue"
     >
-      <img class="catalog-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
+      <img class="book-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
       <form>
-        <p class="catalog-item__name">{{bookData.description | reduceString}}</p>
-        <input type="text" class="name" placeholder="Имя" v-model="nameValue">
-        <label class="nameError" v-if="!orderValidation.isNameValid">Введите корректное имя</label>
-        <input type="tel" class="tel" placeholder="+380978664455" v-model="phoneValue">
-        <label class="telError" v-if="!orderValidation.isNameValid">Введите корректный телефон</label>
-        <input type="email" class="email" placeholder="vvvttt@gmail.com" v-model="emailValue">
-        <label class="emailError" v-if="!orderValidation.isNameValid">Введите корректную почту</label>
+        <p class="book-item__name">{{bookData.description | reduceString}}</p>
+        <input type="book-item__text" class="name" placeholder="Имя" v-model="nameValue">
+        <label class="book-item__nameError" v-if="!orderValidation.isNameValid">Введите корректное имя</label>
+        <input type="book-item__tel" class="tel" placeholder="+380978664455" v-model="phoneValue">
+        <label class="book-item__telError" v-if="!orderValidation.isNameValid">Введите корректный телефон</label>
+        <input type="book-item__email" class="email" placeholder="vvvttt@gmail.com" v-model="emailValue">
+        <label class="book-item__emailError" v-if="!orderValidation.isNameValid">Введите корректную почту</label>
       </form>
     </v-popup>
 
-    <img class="catalog-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
-    <p class="catalog-item__name">{{bookData.title}}</p>
-    <p class="catalog-item__price">Авторы: {{bookData.authors}}</p>
-    <p class="catalog-item__price">Год выпуска: {{bookData.publishedDate}}</p>
+    <img class="book-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
+    <p class="book-item__name">{{bookData.title}}</p>
+    <p class="book-item__price">Авторы: {{bookData.authors}}</p>
+    <p class="book-item__price">Год выпуска: {{bookData.publishedDate}}</p>
     <br>
     <button
-        class="catalog-item__add_to_cart_btn btn"
+        class="book-item__add_to_cart_btn btn"
         @click="showPopupInfo"
     >Заказать
     </button>
@@ -116,7 +116,7 @@
 </script>
 
 <style lang="scss">
-  .catalog-item {
+  .book-item {
     flex-basis: 25%;
     box-shadow: 0 0 8px 0 #e0e0e0;
     padding: $padding*2;
@@ -126,24 +126,24 @@
       width: 100px;
     }
     }
-  .name{
+  .book-item__name{
     margin-bottom: 10px;
   }
-  .tel{
+  .book-item__tel{
     margin-bottom: 10px;
   }
-  .email{
+  .book-item__email{
     margin-bottom: 10px;
   }
-    .nameError{
+    .book-item__nameError{
       font-size: 11px;
       color: red;
     }
-    .telError{
+    .book-item__telError{
       font-size: 11px;
       color: red;
     }
-    .emailError{
+    .book-item__emailError{
       font-size: 11px;
       color: red;
     }

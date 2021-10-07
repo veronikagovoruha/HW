@@ -6,7 +6,7 @@
     />
 
     <router-link :to="{name: 'catalog'}">
-      <div class="catalog__link_to_cart">Вернутся</div>
+      <div class="cart__link_to_cart">Вернутся</div>
     </router-link>
     <h1>Корзина</h1>
     <p v-if="!cart_data.length">Корзина пуста</p>
