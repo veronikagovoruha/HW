@@ -1,7 +1,10 @@
 <template>
   <div class='header'>
     <div class="search-field">
+      <h1 class="header-title">Book Shop</h1>
       <input
+              class="header-input"
+          v-on:keyup.enter="search(searchValue)"
           type="text"
           v-model="searchValue"
       >
@@ -56,24 +59,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $green-bg;
+    background: #fad7dc;
     padding: 16px;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
 
+    .header-input{
+      height: 25px;
+      border-radius: 5px;
+      border: 1px solid gray;
+    }
+
+    .header-title{
+      margin-right: 810px;
+      color: gray;
+    }
     img {
       width: 50px;
     }
 
     .header__link_to_cart{
-      padding-left: 40px;
+      padding-left: 20px;
+      color: gray;
     }
 
     .header__link_to_cart-image{
-      height: 30px;
-      width: 30px;
+      height: 25px;
+      width: 25px;
+      color: gray;
       padding-right: 5px;
     }
 
@@ -86,9 +101,9 @@
     }
 
     .search_btn {
-      margin-left: 16px;
       background: transparent;
       border: none;
+      color: gray;
     }
   }
 </style>

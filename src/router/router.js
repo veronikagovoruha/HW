@@ -17,7 +17,8 @@ let router = new Router({
     {
       path: '/catalog',
       name: 'catalog',
-      component: vCatalog
+      component: vCatalog,
+      props: true
     },
     {
       path: '/cart',

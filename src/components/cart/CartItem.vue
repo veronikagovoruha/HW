@@ -16,7 +16,7 @@
       </div>
 
     </div>
-    <button @click="deleteFromCart">Удалить</button>
+    <button class="cart-item__btn" @click="deleteFromCart">Удалить</button>
   </div>
 </template>
 
@@ -80,6 +80,15 @@ import formattedPrice from "../../filters/price-format";
     }
     .quantity__btn {
       cursor: pointer;
+    }
+
+    .cart-item__btn{
+      width: 80px;
+      height: 30px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      background: #fad7dc;
+      color: #424141;
     }
 
     .quantity__tools {

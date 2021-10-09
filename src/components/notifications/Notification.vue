@@ -73,7 +73,7 @@
 <style lang="scss">
   .v-notification {
     position: fixed;
-    top: 80px;
+    top: 90px;
     right: 16px;
     z-index: 10;
     &__messages_list {
@@ -89,7 +89,7 @@
       align-items: center;
       height: 50px;
       margin-bottom: 16px;
-      background: green;
+      background: grey;
       &.error {
         background: red;
       }
@@ -97,7 +97,7 @@
         background: orange;
       }
       &.check_circle {
-        background: green;
+        background: grey;
       }
     }
     .content {

@@ -16,7 +16,6 @@
         <slot></slot>
       </div>
       <div class="popup__footer">
-        <button class="close_modal" @click="closePopup">Закрыть</button>
         <button
             class="submit_btn"
             @click="rightBtnAction"
@@ -111,14 +110,13 @@
       align-items: center;
     }
     .submit_btn {
+      margin-top: 20px;
+      margin-left: 130px;
       padding: 8px;
-      color: #ffffff;
-      background: #26ae68;
-    }
-    .close_modal {
-      padding: 8px;
-      color: #ffffff;
-      background: red;
+      border: 1px solid gray;
+      border-radius: 5px;
+      color: gray;
+      background: #fad7dc;
     }
   }
 </style>

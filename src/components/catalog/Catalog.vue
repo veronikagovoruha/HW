@@ -5,7 +5,7 @@
         :messages="messages"
     />
 
-    <h1>Каталог</h1>
+    <h1 class="catalog-title">Каталог</h1>
     <div class="catalog__list">
       <BookItem
           v-for="book in booksList"
@@ -28,7 +28,11 @@
       BookItem,
       Notification
     },
-    props: {},
+    props: {
+      ordered:{
+        type: String,
+      }
+    },
     data() {
       return {
         messages: [],
@@ -54,7 +58,8 @@
     },
     methods: {
       ...mapActions([
-        'ADD_TO_CART'
+        'ADD_TO_CART',
+        'CLEANUP_CART',
       ]),
       buildAuthors(authors){
         return authors ? authors.join(", ") : "";
@@ -71,6 +76,15 @@
                   )
                 })
       },
+    },
+    activated() {
+      console.log(this.ordered);
+      if (this.ordered){
+        this.CLEANUP_CART();
+        let timeStamp = Date.now().toLocaleString();
+        this.messages.unshift(
+                {name: this.ordered, icon: 'check_circle', id: timeStamp});
+      }
     },
     watch: {
     },
@@ -92,6 +106,10 @@
       right: 10px;
       padding: $padding*2;
     }
+  }
+
+  .catalog-title{
+    color: gray;
   }
 
   .filters {

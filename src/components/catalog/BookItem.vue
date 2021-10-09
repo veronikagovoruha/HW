@@ -14,11 +14,11 @@
       <img class="book-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
       <form>
         <p class="book-item__name">{{bookData.description | reduceString}}</p>
-        <input type="book-item__text" class="name" placeholder="Имя" v-model="nameValue">
-        <label class="book-item__nameError" v-if="!orderValidation.isNameValid">Введите корректное имя</label>
-        <input type="book-item__tel" class="tel" placeholder="+380978664455" v-model="phoneValue">
-        <label class="book-item__telError" v-if="!orderValidation.isPhoneValid">Введите корректный телефон</label>
-        <input type="book-item__email" class="email" placeholder="vvvttt@gmail.com" v-model="emailValue">
+        <input type="book-item__text" class="book-item__nameV" placeholder="Имя" v-model="nameValue"><br>
+        <label class="book-item__nameError" v-if="!orderValidation.isNameValid">Введите корректное имя</label><br>
+        <input type="book-item__tel" class="book-item__tel" placeholder="+380978664455" v-model="phoneValue"><br>
+        <label class="book-item__telError" v-if="!orderValidation.isPhoneValid">Введите корректный телефон</label><br>
+        <input type="book-item__email" class="book-item__email" placeholder="vvvttt@gmail.com" v-model="emailValue"><br>
         <label class="book-item__emailError" v-if="!orderValidation.isEmailValid">Введите корректную почту</label>
       </form>
     </v-popup>
@@ -29,7 +29,7 @@
     <p class="book-item__price">Год выпуска: {{bookData.publishedDate}}</p>
     <br>
     <button
-        class="book-item__add_to_cart_btn btn"
+        class="book-item__add_to_cart_btn "
         @click="showPopupInfo"
     >Заказать
     </button>
@@ -127,15 +127,35 @@
       width: 100px;
     }
     }
-  .book-item__name{
-    margin-bottom: 10px;
+
+  .book-item__add_to_cart_btn{
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    background: #fad7dc;
+    color: #424141;
+  }
+  .book-item__nameV{
+    border-radius: 5px;
+    border: 1px solid grey;
+    height: 20px;
+    margin-bottom: 5px;
   }
   .book-item__tel{
-    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    height: 20px;
+    margin-bottom: 5px;
   }
   .book-item__email{
-    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    height: 20px;
+    margin-bottom: 5px;
   }
+
+
     .book-item__nameError{
       font-size: 11px;
       color: red;

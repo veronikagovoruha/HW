@@ -5,10 +5,10 @@
             :messages="messages"
     />
 
-    <router-link :to="{name: 'catalog'}">
+    <router-link class="cart-link" :to="{name: 'catalog'}">
       <div class="cart__link_to_cart">Вернутся</div>
     </router-link>
-    <h1>Корзина</h1>
+    <h1 class="cart-title">Корзина</h1>
     <p v-if="!cart_data.length">Корзина пуста</p>
     <CartItem
         v-for="(item, index) in cart_data"
@@ -19,7 +19,10 @@
         @decrement="decrement(index)"
     />
     <div class="cart__total">
-      <button v-if="cart_data.length" @click="order()">Заказать</button>
+      <label class="cart__total-sum">Общая сумма: {{this.toFix(cartTotalCost)}}</label>
+      <router-link :to="{name: 'catalog', params: {ordered: `Ваш заказ на сумму ${this.toFix(cartTotalCost)} успешно оформлен`}}">
+        <button class="cart-btn" v-if="cart_data.length">Заказать</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -50,14 +53,10 @@
         'DELETE_FROM_CART',
         'INCREMENT_CART_ITEM',
         'DECREMENT_CART_ITEM',
-        'CLEANUP_CART',
       ]),
-      order() {
-        let timeStamp = Date.now().toLocaleString();
-        this.CLEANUP_CART();
-        this.messages.unshift(
-                {name: `Ваш заказ на сумму ${this.cartTotalCost} успешно оформлен`, icon: 'check_circle', id: timeStamp}
-        )
+      toFix(value) {
+        value = parseFloat(value);
+        return value.toFixed(2);
       },
       increment(index) {
         this.INCREMENT_CART_ITEM(index)
@@ -113,6 +112,39 @@
       background: $green-bg;
       color: #ffffff;
       font-size: 20px;
+    }
+
+    .cart-link{
+      text-decoration: none;
+    }
+
+    .cart__total{
+      background: #fad7dc;
+    }
+
+    .cart-btn{
+      width: 80px;
+      height: 30px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      background: #424141;
+      color:#fad7dc;
+    }
+
+    .cart__total-sum{
+      color: gray;
+      margin-right: 50px;
+    }
+
+    .cart-title{
+      color: gray;
+    }
+
+    .cart__link_to_cart{
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 20px;
+      color: #808080;
     }
 
     .total__name {
