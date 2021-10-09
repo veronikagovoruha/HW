@@ -2,12 +2,6 @@ export default {
   SET_SEARCH_VALUE_TO_VUEX: (state, value) => {
     state.searchValue = value;
   },
-  SET_FORM_VALUE: (state, formValue) => {
-    state.formValue = formValue;
-  },
-  CLEANUP_FORM: (state) => {
-    state.formValue = {};
-  },
   SET_BOOKS_TO_STATE: (state, books) => {
     state.books = books;
   },

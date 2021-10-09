@@ -11,7 +11,6 @@
           v-for="book in booksList"
           :key="book.title"
           :bookData="book"
-          :orderValidation="orderValidation"
           @addToCart="addToCart"
       />
     </div>
@@ -33,17 +32,11 @@
     data() {
       return {
         messages: [],
-        orderValidation: {
-          isNameValid: true,
-          isPhoneValid: true,
-          isEmailValid: true
-        }
       }
     },
     computed: {
       ...mapGetters([
         'BOOKS',
-        'FORM',
       ]),
       booksList() {
         return this.BOOKS
@@ -69,23 +62,14 @@
       formatPublishedDate(publishedDate){
         return publishedDate ? publishedDate : "";
       },
-      validateEmail(email) {
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-      },
       addToCart(data) {
-        this.orderValidation.isNameValid = this.FORM.nameValue.length >= 2;
-        this.orderValidation.isEmailValid = this.validateEmail(this.FORM.emailValue);
-        this.orderValidation.isPhoneValid = this.FORM.phoneValue.length >= 2;
-        if(this.orderValidation.isNameValid && this.orderValidation.isEmailValid && this.orderValidation.isPhoneValid) {
-          this.ADD_TO_CART(data)
-                  .then(() => {
-                    let timeStamp = Date.now().toLocaleString();
-                    this.messages.unshift(
-                            {name: 'Товар добавлен в корзину', icon: 'check_circle', id: timeStamp}
-                    )
-                  })
-        }
+        this.ADD_TO_CART(data)
+                .then(() => {
+                  let timeStamp = Date.now().toLocaleString();
+                  this.messages.unshift(
+                          {name: 'Товар добавлен в корзину', icon: 'check_circle', id: timeStamp}
+                  )
+                })
       },
     },
     watch: {

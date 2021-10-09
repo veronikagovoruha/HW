@@ -19,7 +19,7 @@
         <button class="close_modal" @click="closePopup">Закрыть</button>
         <button
             class="submit_btn"
-            @click="rightBtnAction(nameValue, emailValue, phoneValue)"
+            @click="rightBtnAction"
         >
           {{rightBtnTitle}}
         </button>
@@ -62,8 +62,8 @@
       ...mapActions([
         'ADD_TO_CART'
       ]),
-      rightBtnAction(nameValue, emailValue, phoneValue) {
-        this.$emit('rightBtnAction', nameValue, emailValue, phoneValue)
+      rightBtnAction() {
+        this.$emit('rightBtnAction')
       },
       closePopup() {
         this.$emit('closePopup')

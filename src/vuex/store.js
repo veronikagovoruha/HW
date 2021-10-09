@@ -13,7 +13,6 @@ Vue.use(Vuex);
 let store = new Vuex.Store({
   state: {
     searchValue: '',
-    formValue: {},
     books: [],
     cart: []
   },

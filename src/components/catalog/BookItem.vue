@@ -17,9 +17,9 @@
         <input type="book-item__text" class="name" placeholder="Имя" v-model="nameValue">
         <label class="book-item__nameError" v-if="!orderValidation.isNameValid">Введите корректное имя</label>
         <input type="book-item__tel" class="tel" placeholder="+380978664455" v-model="phoneValue">
-        <label class="book-item__telError" v-if="!orderValidation.isNameValid">Введите корректный телефон</label>
+        <label class="book-item__telError" v-if="!orderValidation.isPhoneValid">Введите корректный телефон</label>
         <input type="book-item__email" class="email" placeholder="vvvttt@gmail.com" v-model="emailValue">
-        <label class="book-item__emailError" v-if="!orderValidation.isNameValid">Введите корректную почту</label>
+        <label class="book-item__emailError" v-if="!orderValidation.isEmailValid">Введите корректную почту</label>
       </form>
     </v-popup>
 
@@ -40,7 +40,6 @@
   import vPopup from '../popup/v-popup'
   import reduceString from '../../filters/reduceString'
   import formattedPrice from "../../filters/price-format";
-  import {mapActions} from "vuex";
 
   export default {
     name: "BookItem",
@@ -54,12 +53,6 @@
           return {}
         }
       },
-      orderValidation: {
-        type: Object,
-        default() {
-          return {}
-        }
-      }
     },
     data() {
       return {
@@ -67,6 +60,11 @@
         phoneValue: '',
         emailValue: '',
         isInfoPopupVisible: false,
+        orderValidation: {
+          isNameValid: true,
+          isPhoneValid: true,
+          isEmailValid: true
+        },
       }
     },
     filters: {
@@ -89,24 +87,27 @@
       },
     },
     methods: {
-      ...mapActions([
-        'SETUP_FORM',
-        'CLEANUP_FORM',
-      ]),
       showPopupInfo() {
         this.isInfoPopupVisible = true;
       },
       closeInfoPopup() {
-        this.CLEANUP_FORM();
+        this.nameValue = "";
+        this.phoneValue ="";
+        this.emailValue ="";
         this.isInfoPopupVisible = false;
       },
-      addToCart(nameValue, emailValue, phoneValue) {
-        this.SETUP_FORM({
-          "nameValue": nameValue,
-          "emailValue": emailValue,
-          "phoneValue": phoneValue,
-        });
-        this.$emit('addToCart', this.bookData);
+      validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      },
+      addToCart() {
+        this.orderValidation.isNameValid = this.nameValue.length >= 2;
+        this.orderValidation.isEmailValid = this.validateEmail(this.emailValue);
+        this.orderValidation.isPhoneValid = this.phoneValue.length >= 2;
+        if(this.orderValidation.isNameValid && this.orderValidation.isEmailValid && this.orderValidation.isPhoneValid) {
+          this.closeInfoPopup();
+          this.$emit('addToCart', this.bookData);
+        }
       }
     },
     mounted() {
