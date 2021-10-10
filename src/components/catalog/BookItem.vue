@@ -26,22 +26,24 @@
     <img class="book-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
     <p class="book-item__name">{{bookData.title}}</p>
     <p class="book-item__price">Авторы: {{bookData.authors}}</p>
-    <p class="book-item__price">Год выпуска: {{bookData.publishedDate}}</p>
+    <p class="book-item__price" >Год выпуска: {{bookData.publishedDate}}</p>
     <br>
     <button
         class="book-item__add_to_cart_btn "
+        v-bind:class="[bookData.forSale ? 'book-item__active' : 'book-item__disabled']"
         @click="showPopupInfo"
+        :disabled="!bookData.forSale"
     >Заказать
     </button>
   </div>
 </template>
 
 <script>
-  import vPopup from '../popup/v-popup'
-  import reduceString from '../../filters/reduceString'
-  import formattedPrice from "../../filters/price-format";
+    import vPopup from '../popup/v-popup'
+    import reduceString from '../../filters/reduceString'
+    import formattedPrice from "../../filters/price-format";
 
-  export default {
+    export default {
     name: "BookItem",
     components: {
       vPopup
@@ -71,21 +73,6 @@
       reduceString,
       formattedPrice
     },
-    computed: {
-      booksList() {
-        return this.BOOKS
-                .filter(item => item["saleInfo"]["saleability"] === "FOR_SALE")
-                .map(item => ({
-                  "title":item["volumeInfo"]["title"],
-                  "authors":this.buildAuthors(item["volumeInfo"]["authors"]),
-                  "publishedDate":this.formatPublishedDate(item["volumeInfo"]["publishedDate"]),
-                  "description":item["volumeInfo"]["description"],
-                  "imageLinks":item["volumeInfo"]["imageLinks"],
-                  "price":item["saleInfo"]["listPrice"]["amount"],
-                  "currencyCode":item["saleInfo"]["listPrice"]["currencyCode"]
-                }))
-      },
-    },
     methods: {
       showPopupInfo() {
         this.isInfoPopupVisible = true;
@@ -100,10 +87,14 @@
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
       },
+      validatePhone(phone) {
+        const re = /^\+380[0-9]{9}$/;
+        return re.test(String(phone));
+      },
       addToCart() {
         this.orderValidation.isNameValid = this.nameValue.length >= 2;
         this.orderValidation.isEmailValid = this.validateEmail(this.emailValue);
-        this.orderValidation.isPhoneValid = this.phoneValue.length >= 2;
+        this.orderValidation.isPhoneValid = this.validatePhone(this.phoneValue);
         if(this.orderValidation.isNameValid && this.orderValidation.isEmailValid && this.orderValidation.isPhoneValid) {
           this.closeInfoPopup();
           this.$emit('addToCart', this.bookData);
@@ -135,6 +126,12 @@
     border: 1px solid gray;
     background: #fad7dc;
     color: #424141;
+  }
+  .book-item__active {
+    background: #fad7dc;
+  }
+  .book-item__disabled{
+    background: #ffffff;
   }
   .book-item__nameV{
     border-radius: 5px;

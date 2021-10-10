@@ -4,6 +4,7 @@ export default {
         .then(response => response.json())
         .then(json => {
             commit('SET_BOOKS_TO_STATE', json["items"]);
+            console.log(json["items"].length);
             return json["items"];
         })
         .catch(error => {
