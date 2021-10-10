@@ -1,11 +1,11 @@
 <template>
-  <div class='v-notification'>
+  <div class='notification'>
     <transition-group
-        name="v-transition-animate"
+        name="transition-animate"
         class="messages_list"
     >
       <div
-          class="v-notification__content"
+          class="notification__content"
           v-for="message in messages"
           :key="message.id"
           :class="message.icon"
@@ -71,7 +71,7 @@
 </script>
 
 <style lang="scss">
-  .v-notification {
+  .notification {
     position: fixed;
     top: 90px;
     right: 16px;
@@ -112,7 +112,7 @@
     }
   }
 
-  .v-transition-animate {
+  .transition-animate {
     &-enter {
       transform: translateX(120px);
       opacity: 0;

@@ -31,7 +31,7 @@
   import {mapActions} from "vuex";
 
   export default {
-    name: "popup",
+    name: "Popup",
     props: {
       nameValue: {
         type: String,

@@ -1,7 +1,7 @@
 <template >
   <div class='book-item'>
 
-    <v-popup
+    <popup
         v-if="isInfoPopupVisible"
         rightBtnTitle="Добавить в корзину"
         :popupTitle="bookData.title"
@@ -21,7 +21,7 @@
         <input type="book-item__email" class="book-item__email" placeholder="vvvttt@gmail.com" v-model="emailValue"><br>
         <label class="book-item__emailError" v-if="!orderValidation.isEmailValid">Введите корректную почту</label>
       </form>
-    </v-popup>
+    </popup>
 
     <img class="book-item__image" :src="bookData.imageLinks.smallThumbnail" alt="img">
     <p class="book-item__name">{{bookData.title}}</p>
@@ -39,14 +39,14 @@
 </template>
 
 <script>
-    import vPopup from '../popup/v-popup'
+    import Popup from '../popup/Popup'
     import reduceString from '../../filters/reduceString'
     import formattedPrice from "../../filters/price-format";
 
     export default {
     name: "BookItem",
     components: {
-      vPopup
+      Popup
     },
     props: {
       bookData: {
